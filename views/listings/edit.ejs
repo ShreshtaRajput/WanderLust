@@ -1,0 +1,71 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+  <div class="row">
+    <div class="col-8 offset-2">
+      <form
+        method="POST"
+        action="/listings/<%= listing._id %>?_method=PUT"
+        novalidate
+        class="needs-validation"
+        enctype="multipart/form-data"
+      >
+        <h2>Edit your listing</h2>
+        <div class="mb-3">
+          <label for="title" class="form-label">Enter Title</label>
+          <input
+            name="listing[title]"
+            value="<%= listing.title %>"
+            type="text"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Enter Description</label>
+          <textarea name="listing[description]" class="form-control" required>
+            <%= listing.description %></textarea
+          >
+        </div>
+        <div class="mb-3">
+          Original Image<br />
+          <img src="<%= originalImageUrl %>" />
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Upload new image</label>
+          <input
+            name="listing[image]"
+            class="form-control"
+            value="<%= listing.image %>"
+            type="file"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Enter Price</label>
+          <input name="listing[price]" type="number" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="country" class="form-label">Enter Country</label>
+          <input
+            name="listing[country]"
+            value="<%= listing.country %>"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="location" class="form-label">Enter Location</label>
+          <input
+            name="listing[location]"
+            value="<%= listing.location%>"
+            type="text"
+            class="form-control"
+            required
+          />
+        </div>
+        <button class="btn btn-dark add-btn">Edit</button>
+      </form>
+    </div>
+  </div>
+</body>
+<script src="/CSS/js/script.js"></script>
