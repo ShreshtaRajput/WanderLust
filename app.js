@@ -20,6 +20,7 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
 const dbUrl = process.env.ATLASDB_URL;
+// const dbUrl = "mongodb://127.0.0.1:27017/wanderlust_proj";
 
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");

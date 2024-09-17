@@ -13,6 +13,7 @@ module.exports.renderNewForm = (req, res) => {
 
 // new listing - POST
 module.exports.newListing = async (req, res) => {
+  console.log(req.file);
   let url = req.file.path;
   let filename = req.file.filename;
   const newListing = new Listing(req.body.listing);
@@ -29,11 +30,21 @@ module.exports.showListing = async (req, res) => {
   const listing = await Listing.findById(id)
     .populate({ path: "review", populate: { path: "author" } })
     .populate("owner");
+  const location = listing.location;
+  const coords_res = await fetch(
+    `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(
+      location
+    )}.json?key=9AM7JDY39qjYqwRo9USwEN8QDRHlv38f`
+  );
+  const coords = await coords_res.json();
+  const { lat, lon } = coords.results[0].position;
+  // console.log(coords.results[0].position);
+  // console.log(lat, lon);
   if (!listing) {
     req.flash("error", "Listing not found");
     res.redirect("/listings");
   }
-  res.render("listings/show.ejs", { listing });
+  res.render("listings/show.ejs", { listing, lat, lon });
 };
 
 // edit route
