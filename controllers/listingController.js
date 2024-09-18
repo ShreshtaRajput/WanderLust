@@ -38,8 +38,6 @@ module.exports.showListing = async (req, res) => {
   );
   const coords = await coords_res.json();
   const { lat, lon } = coords.results[0].position;
-  // console.log(coords.results[0].position);
-  // console.log(lat, lon);
   if (!listing) {
     req.flash("error", "Listing not found");
     res.redirect("/listings");
